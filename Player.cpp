@@ -1,94 +1,83 @@
-#include <string>
 #include "Player.h"
+#include "utilities.h"
 
-class Player
-{
-private:
-    std::string name;
-    int level;
-    int force;
-    int maxHP;
-    int HP;
-    int coins;
-    
-public:
-    Player(std::string name,int maxHP = 100, int force = 5) : level(1),coins(0),name(name){
-        //if the input values are legal
-        if (maxHP > 0){
-            Player::maxHP = maxHP;
-            Player::HP = maxHP;
-        }
-        if(force >= 0){
-            Player::force = force;
-        }
+using std::string;
+
+
+Player::Player(string name,int maxHP, int force) : m_level(1),m_coins(0),name(name),m_force(DEFAULT_FORCE),m_maxHP(DEFAULT_MAX_HP){
+    //if the input values are legal
+    if (maxHP > 0){
+        m_maxHP = maxHP;
+        m_HP = maxHP;
     }
-    ~Player();
-
-    void printInfo(){        
-        printPlayerInfo(Player::name.c_str(), Player::level,  Player::force, Player::HP,  Player::coins);
+    if(force >= 0){
+        m_force = force;
     }
+}
 
-    void levelUp(){
-        if (Player::level < 10){
-            Player::level++;
-        }
+void Player::printInfo(){
+    printPlayerInfo(name.c_str(), m_level,  m_force, m_HP,  m_coins);
+}
+
+void Player::levelUp(){
+    if (m_level < 10){
+        m_level++;
     }
+}
 
-    int getLevel(){
-        return Player::level;
-    }
+int Player::getLevel(){
+    return m_level;
+}
 
-    //adds to force the num that accepts as argument
-    void buff(int num){
-        Player::force += num;
-    }
+//adds to force the num that accepts as argument
+void Player::buff(int num){
+    m_force += num;
+}
 
-    void heal(int num){
-        if(num>0){
-            if ((Player::HP + num)>Player::maxHP){
-                Player::HP = Player::maxHP;
-            }
-            else{
-                Player::HP += num;
-            }
-        }
-    }
-
-    void damage(int num){
-        if(num>0){
-            if ((Player::HP - num) < 0){
-                Player::HP = 0;
-            }
-            else{
-                Player::HP -= num;
-            }
-        }
-    }
-
-    bool isKnockedOut(){
-        if(Player::HP == 0)
-            return true;
-        else
-            return false;
-    }
-
-    void addCoins(int num){
-        Player::coins += num;
-    }
-
-    bool pay(int num){
-        if(Player::coins-num < 0){ //if the player doesnt have enough money to pay
-            return false;
+void Player::heal(int num){
+    if(num>0){
+        if ((m_HP + num)>m_maxHP){
+            m_HP = m_maxHP;
         }
         else{
-            Player::coins-=num;
-            return true;
+            m_HP += num;
         }
     }
+}
 
-    int getAttackStrength(){
-        int strength = Player::level + Player::force; 
-        return strength;
+void Player::damage(int num){
+
+    if(num <= 0)
+        return;
+
+    if ((m_HP - num) < 0){
+        m_HP = 0;
     }
-};
+    else{
+        m_HP -= num;
+    }
 
+}
+
+bool Player::isKnockedOut(){
+    return m_HP == 0;
+}
+
+void Player::addCoins(int num){
+    m_coins += num;
+}
+
+bool Player::pay(int num){
+    if(m_coins-num < 0){ //if the player doesnt have enough money to pay
+        return false;
+    }
+    else{
+        m_coins-=num;
+        return true;
+    }
+}
+
+int Player::getAttackStrength(){
+    int strength = m_level + m_force;
+    return strength;
+}
