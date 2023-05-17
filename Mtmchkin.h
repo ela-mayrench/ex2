@@ -58,10 +58,24 @@ public:
     GameStatus getGameStatus() const;
 
     //TODO: complete the Mtmchkin class.
+    int getNumOfCards() const;
+    Player getPlayer() const;
+    Card* getCardArr() const;
+
+    ~Mtmchkin();
+    Mtmchkin(const Mtmchkin&);
+    Mtmchkin& Mtmchkin::operator=(Mtmchkin& );
+
+
+    void updateGameStatus();
+
 
 private:
-    //TODO: complete the Mtmchkin class.
-
+    Card* m_cardsArray;
+    Player m_player;
+    GameStatus m_status;
+    int m_currCard;
+    int m_numOfCards;
 };
 
 

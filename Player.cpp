@@ -4,7 +4,7 @@
 using std::string;
 
 
-Player::Player(string name,int maxHP, int force) : m_level(1),m_coins(0),name(name),m_force(DEFAULT_FORCE),m_maxHP(DEFAULT_MAX_HP){
+Player::Player(string name,int maxHP, int force) : m_level(1),name(name),m_force(DEFAULT_FORCE),m_maxHP(DEFAULT_MAX_HP),m_coins(0){
     //if the input values are legal
     if (maxHP > 0){
         m_maxHP = maxHP;
@@ -25,7 +25,7 @@ void Player::levelUp(){
     }
 }
 
-int Player::getLevel(){
+int Player::getLevel() const{
     return m_level;
 }
 
@@ -60,7 +60,7 @@ void Player::damage(int num){
 }
 
 bool Player::isKnockedOut(){
-    return m_HP == 0;
+    return (m_HP == 0);
 }
 
 void Player::addCoins(int num){

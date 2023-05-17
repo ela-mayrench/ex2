@@ -5,7 +5,7 @@ class Player
 private:
     std::string name;
     int m_level;
-    int m_force;//m_force - convention?
+    int m_force;
     int m_maxHP;
     int m_HP;
     int m_coins;
@@ -24,7 +24,7 @@ public:
 
     void levelUp();
 
-    int getLevel();
+    int getLevel() const;
 
     void buff(int num);
 
