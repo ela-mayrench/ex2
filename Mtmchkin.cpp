@@ -47,14 +47,7 @@ GameStatus Mtmchkin::getGameStatus() const{
 
 //destructor
 Mtmchkin::~Mtmchkin(){
-    for (int card = 0; card < m_numOfCards; card++)
-    {
-        m_cardsArray[card].~Card();
-    }
-
-    delete(m_cardsArray);
-    m_player.~Player();
-
+    delete[] m_cardsArray;
 }
 
 int Mtmchkin::getNumOfCards() const{
@@ -81,7 +74,7 @@ Card* Mtmchkin::getCardArr() const{
 //copy constructor for mtmchkin
 Mtmchkin::Mtmchkin(const Mtmchkin& game) : m_player(game.getPlayer()) {
     m_numOfCards = game.getNumOfCards();
-    Card* m_cardsArray=game.getCardArr();
+    m_cardsArray=game.getCardArr();
     m_status = game.getGameStatus();
 
 }

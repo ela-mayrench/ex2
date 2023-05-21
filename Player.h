@@ -1,4 +1,6 @@
 #include <string>
+#ifndef PLAYER_H
+#define PLAYER_H
 
 class Player
 {
@@ -41,3 +43,4 @@ public:
     int getAttackStrength();
 };
 
+#endif // PLAYER_H

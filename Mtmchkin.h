@@ -64,7 +64,7 @@ public:
 
     ~Mtmchkin();
     Mtmchkin(const Mtmchkin&);
-    Mtmchkin& Mtmchkin::operator=(Mtmchkin& );
+    Mtmchkin& operator=(Mtmchkin& );
 
 
     void updateGameStatus();

@@ -4,7 +4,7 @@
 using std::string;
 
 
-Player::Player(string name,int maxHP, int force) : m_level(1),name(name),m_force(DEFAULT_FORCE),m_maxHP(DEFAULT_MAX_HP),m_coins(0){
+Player::Player(string name,int maxHP, int force) : name(name),m_level(1),m_force(DEFAULT_FORCE),m_maxHP(DEFAULT_MAX_HP),m_coins(0){
     //if the input values are legal
     if (maxHP > 0){
         m_maxHP = maxHP;
