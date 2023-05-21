@@ -56,6 +56,7 @@ public:
      *          GameStatus - the current status of the running game
      */
     GameStatus getGameStatus() const;
+    int getCurrCard();
 
     //TODO: complete the Mtmchkin class.
     int getNumOfCards() const;
