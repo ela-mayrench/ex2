@@ -41,17 +41,18 @@ bool Mtmchkin::isOver() const{
     return true;
 }
 
-GameStatus Mtmchkin::getGameStatus() const{
-    return m_status;
-}
-
-int Mtmchkin::getCurrCard(){
-    return m_currCard;
-}
 //destructor
 Mtmchkin::~Mtmchkin(){
     delete[] m_cardsArray;
 }
+GameStatus Mtmchkin::getGameStatus() const{
+    return m_status;
+}
+/*
+int Mtmchkin::getCurrCard(){
+    return m_currCard;
+}
+
 
 int Mtmchkin::getNumOfCards() const{
     return m_numOfCards;
@@ -72,12 +73,13 @@ Card* Mtmchkin::getCardArr() const{
         newCardsArray[card] = Card(m_cardsArray[card]);
     }
     return newCardsArray;
-}
+    return m_cardsArray;
+}*/
 
 //copy constructor for mtmchkin
-Mtmchkin::Mtmchkin(const Mtmchkin& game) : m_player(game.getPlayer()) {
-    m_numOfCards = game.getNumOfCards();
-    m_cardsArray=game.getCardArr();
+Mtmchkin::Mtmchkin(const Mtmchkin& game) : m_player(game.m_player) {
+    m_numOfCards = game.m_numOfCards;
+    m_cardsArray=game.m_cardsArray;
     m_status = game.getGameStatus();
 
 }
@@ -86,22 +88,23 @@ Mtmchkin& Mtmchkin::operator=(Mtmchkin& otherMtmchkin) {
 
     //delete current fields in this game
     delete[] m_cardsArray;
-    m_player.~Player();
 
-    m_numOfCards = otherMtmchkin.getNumOfCards();
+    m_numOfCards = otherMtmchkin.m_numOfCards;
 
     //allocate a new cards array with the same array as in otherMtmchkin
     m_cardsArray = new Card[m_numOfCards];
+    
+    Card * otherCardsArr = otherMtmchkin.m_cardsArray;
 
     for (int card = 0; card < m_numOfCards; card++)
     {
-        Card currCard(m_cardsArray[card]);
+        Card currCard(otherCardsArr[card]);
         m_cardsArray[card] = currCard;
     }
 
-    m_status = otherMtmchkin.getGameStatus();
-    m_player = otherMtmchkin.getPlayer();
-    m_currCard = otherMtmchkin.getCurrCard(); 
+    m_status = otherMtmchkin.m_status;
+    m_player = otherMtmchkin.m_player;
+    m_currCard = otherMtmchkin.m_currCard; 
 
     return *this;
 
